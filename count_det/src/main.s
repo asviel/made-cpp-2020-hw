@@ -2,10 +2,11 @@
 .global count_det
 
 count_det:
+    push {r4}
+    push {lr}
+
     mov r4, r0  // Сохранение адреса начала массива
     mov r3, #3  // Счетчик 3х элементов
-
-    push {lr}
 
     mov r1, #1  // Инициализация промежуточного результата
     bl diag
@@ -48,13 +49,14 @@ count_det:
     add r1, r2
 
     pop {lr}
+    pop {r4}
 
     mov r0, r1
     bx lr
 
 // Произведение элементов главной диагонали
 diag:
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     add r0, #12  // Смещение указателя на 12 байт (3 элемента int32_t)
@@ -71,14 +73,14 @@ diag:
 
 first_triangle:
     add r0, #4
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     add r0, #12
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     mov r0, r4  // Возврат значения адреса начала массива
@@ -88,14 +90,14 @@ first_triangle:
 
 second_triangle:
     add r0, #8
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     add r0, #12
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     mov r0, r4  // Возврат значения адреса начала массива
@@ -106,15 +108,15 @@ second_triangle:
 // Произведение элементов обратной диагонали
 inv_diag:
     add r0, #8
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     add r0, #4
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     add r0, #4
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     mov r0, r4  // Возврат значения адреса начала массива
@@ -123,15 +125,15 @@ inv_diag:
     bx lr
 
 first_inv_triangle:
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     add r0, #16
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     add r0, #4
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     mov r0, r4  // Возврат значения адреса начала массива
@@ -141,15 +143,15 @@ first_inv_triangle:
 
 second_inv_triangle:
     add r0, #4
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     add r0, #4
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     add r0, #16
-    ldrb r2, [r0], #4
+    ldr r2, [r0], #4
     mul r1, r2
 
     mov r0, r4  // Возврат значения адреса начала массива
